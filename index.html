@@ -236,6 +236,8 @@ button:hover{
 
 .right-panel{
     padding:20px;
+    max-width:850px;
+    margin:auto;
 }
 
 .canvas-header{
@@ -263,6 +265,9 @@ button:hover{
 
 canvas{
     width:100%;
+    max-width:780px;
+    margin:auto;
+    display:block;
     background:
     linear-gradient(to bottom,#EFF6FF,#BFDBFE);
     border-radius:20px;
@@ -277,7 +282,8 @@ canvas{
 @media(max-width:1200px){
 
     .main{
-        grid-template-columns:1fr;
+    display:grid;
+    grid-template-columns:320px 1fr;
     }
 
     .header{
@@ -289,6 +295,51 @@ canvas{
     .university{
         text-align:center;
     }
+    /* ===================================================== */
+/* RESULTADOS LATERALES */
+/* ===================================================== */
+
+.simulation-top{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:15px;
+}
+
+.results-side{
+    width:320px;
+
+    background:
+    rgba(2,6,23,0.95);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    border:
+    1px solid rgba(56,189,248,0.3);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.5);
+
+    backdrop-filter:blur(10px);
+}
+
+.results-title{
+    color:#38BDF8;
+    font-weight:bold;
+    font-size:20px;
+    margin-bottom:15px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    padding-bottom:10px;
+}
+
+#resultado{
+    color:#F8FAFC;
+    line-height:2;
+    font-size:16px;
+}
+
+
 }
 
 </style>
@@ -307,7 +358,7 @@ canvas{
 
         <div class="university">
             Física I • Segunda Ley de Newton<br>
-            Alexander Rojo, 0910-25-1382
+            Alexander Rojo, 0910-25-13082
         </div>
 
     </div>
@@ -384,18 +435,6 @@ canvas{
                 INICIAR SIMULACIÓN
             </button>
 
-            <div class="results">
-
-                <div class="results-title">
-                    RESULTADOS DEL SISTEMA
-                </div>
-
-                <div id="resultado">
-                    Esperando simulación...
-                </div>
-
-            </div>
-
         </div>
 
         <!-- PANEL DERECHO -->
@@ -412,8 +451,21 @@ canvas{
                 </div>
 
             </div>
+            <div class="simulation-top">
 
-            <canvas id="canvas" width="1000" height="620"></canvas>
+                <div class="results-side">
+
+                    <div class="results-title">
+                        RESULTADOS DEL SISTEMA
+                    </div>
+
+                    <div id="resultado">
+                        Esperando simulación...
+                    </div>
+                </div>
+            </div>
+
+            <canvas id="canvas" width="780" height="500"></canvas>
 
         </div>
 
@@ -467,8 +519,8 @@ function dibujarSistema(y1,y2){
     // =====================================================
 
     let cx = 500;
-    let cy = 180;
-    let r = 85;
+    let cy = 140;
+    let r = 60;
 
     let grad = ctx.createRadialGradient(
         cx,cy,20,
@@ -496,29 +548,33 @@ function dibujarSistema(y1,y2){
     ctx.fillStyle = "#020617";
     ctx.fill();
 
-    // =====================================================
-    // CUERDA
-    // =====================================================
+  // =====================================================
+// CUERDA
+// =====================================================
 
-    ctx.strokeStyle = "#92400E";
-    ctx.lineWidth = 7;
+ctx.strokeStyle = "#92400E";
+ctx.lineWidth = 5;
 
-    // izquierda
-    ctx.beginPath();
-    ctx.moveTo(415,y1);
-    ctx.lineTo(415,180);
-    ctx.stroke();
+// coordenadas exactas de cuerda
+const cuerdaIzq = cx - r;
+const cuerdaDer = cx + r;
 
-    // arco
-    ctx.beginPath();
-    ctx.arc(cx,cy,r,Math.PI,0,false);
-    ctx.stroke();
+// izquierda
+ctx.beginPath();
+ctx.moveTo(cuerdaIzq, y1);
+ctx.lineTo(cuerdaIzq, cy);
+ctx.stroke();
 
-    // derecha
-    ctx.beginPath();
-    ctx.moveTo(585,180);
-    ctx.lineTo(585,y2);
-    ctx.stroke();
+// arco polea
+ctx.beginPath();
+ctx.arc(cx, cy, r, Math.PI, 0, false);
+ctx.stroke();
+
+// derecha
+ctx.beginPath();
+ctx.moveTo(cuerdaDer, cy);
+ctx.lineTo(cuerdaDer, y2);
+ctx.stroke();
 
     // =====================================================
     // BLOQUE 1
@@ -534,12 +590,12 @@ function dibujarSistema(y1,y2){
 
     ctx.fillStyle = g1;
 
-    ctx.fillRect(350,y1,130,120);
+    ctx.fillRect(cuerdaIzq - 50, y1, 100, 90);
 
     ctx.strokeStyle = "#111827";
     ctx.lineWidth = 4;
 
-    ctx.strokeRect(350,y1,130,120);
+    ctx.strokeRect(cuerdaIzq - 50, y1, 100, 90);
 
     // =====================================================
     // BLOQUE 2
@@ -555,10 +611,10 @@ function dibujarSistema(y1,y2){
 
     ctx.fillStyle = g2;
 
-    ctx.fillRect(520,y2,130,120);
+    ctx.fillRect(cuerdaDer - 50, y2, 100, 90);
 
     ctx.strokeStyle = "#111827";
-    ctx.strokeRect(520,y2,130,120);
+    ctx.strokeRect(cuerdaDer - 50, y2, 100, 90);
 
     // =====================================================
     // TEXTO MASAS
@@ -570,14 +626,14 @@ function dibujarSistema(y1,y2){
 
     ctx.fillText(
         document.getElementById("m1").value + " kg",
-        415,
-        y1 + 70
+        cuerdaIzq,
+        y1 + 55
     );
 
     ctx.fillText(
         document.getElementById("m2").value + " kg",
-        585,
-        y2 + 70
+        cuerdaDer,
+        y2 + 55
     );
 
     // =====================================================
@@ -601,26 +657,28 @@ function dibujarSistema(y1,y2){
 
 function animar(direccion){
 
-    let y1 = 340;
-    let y2 = 340;
+    let y1 = 220;
+    let y2 = 220;
 
-    const sup = 230;
-    const inf = 430;
+    const sup = 140;
+    const inf = 330;
 
     let frame = 0;
 
     function mover(){
 
-        if(frame < 120){
+        if(frame < 80){
 
             if(direccion === "bloque1"){
 
                 if(y1 < inf) y1 += 2;
+
                 if(y2 > sup) y2 -= 2;
 
             }else{
 
                 if(y1 > sup) y1 -= 2;
+
                 if(y2 < inf) y2 += 2;
             }
 
@@ -727,7 +785,7 @@ function calcular(){
     }
 }
 
-dibujarSistema(340,340);
+dibujarSistema(220,220);
 
 </script>
 
