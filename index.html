@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sistema de Poleas - Newton</title>
+<title>Simulador Universitario - Sistema de Poleas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -17,61 +18,123 @@
 }
 
 body{
-    font-family:'Poppins', sans-serif;
-    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    background:
+    radial-gradient(circle at top left,#1E3A8A,#020617 60%);
     min-height:100vh;
-    color:white;
     overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+    color:white;
 }
+
+/* ===================================================== */
+/* EFECTO FONDO TECNOLÓGICO */
+/* ===================================================== */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+    background-size:40px 40px;
+    pointer-events:none;
+}
+
+/* ===================================================== */
+/* CONTENEDOR */
+/* ===================================================== */
 
 .container{
     width:95%;
-    max-width:1400px;
+    max-width:1500px;
     margin:auto;
     padding:20px;
 }
 
-.titulo{
-    text-align:center;
-    font-size:38px;
-    font-weight:700;
+/* ===================================================== */
+/* HEADER */
+/* ===================================================== */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     margin-bottom:25px;
-    color:#ffffff;
-    text-shadow:0 0 15px rgba(255,255,255,0.4);
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(12px);
 }
+
+.title{
+    font-family:'Orbitron',sans-serif;
+    font-size:32px;
+    font-weight:700;
+    color:#38BDF8;
+    text-shadow:0 0 20px rgba(56,189,248,0.6);
+}
+
+.university{
+    text-align:right;
+    color:#E2E8F0;
+    font-size:14px;
+}
+
+/* ===================================================== */
+/* MAIN */
+/* ===================================================== */
 
 .main{
-    display:flex;
+    display:grid;
+    grid-template-columns:350px 1fr;
     gap:25px;
-    flex-wrap:wrap;
 }
+
+/* ===================================================== */
+/* TARJETAS */
+/* ===================================================== */
 
 .card{
-    background:rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.1);
-    backdrop-filter:blur(10px);
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    backdrop-filter:blur(12px);
+    border-radius:25px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
 }
 
+/* ===================================================== */
+/* PANEL IZQUIERDO */
+/* ===================================================== */
+
 .left-panel{
-    width:350px;
     padding:25px;
 }
 
-.enunciado{
-    line-height:1.8;
-    font-size:16px;
-    color:#E2E8F0;
+.section{
+    margin-bottom:25px;
 }
 
 .section-title{
-    margin-top:20px;
-    margin-bottom:10px;
     font-size:18px;
     font-weight:600;
-    color:#93C5FD;
+    margin-bottom:15px;
+    color:#7DD3FC;
+    border-left:4px solid #38BDF8;
+    padding-left:10px;
 }
+
+.description{
+    line-height:1.8;
+    color:#CBD5E1;
+    font-size:15px;
+}
+
+/* ===================================================== */
+/* INPUTS */
+/* ===================================================== */
 
 .input-group{
     margin-bottom:18px;
@@ -80,17 +143,18 @@ body{
 .input-group label{
     display:block;
     margin-bottom:8px;
+    color:#E2E8F0;
 }
 
 .input-group input{
     width:100%;
-    padding:12px;
+    padding:14px;
+    border-radius:12px;
     border:none;
-    border-radius:10px;
+    outline:none;
     background:#0F172A;
     color:white;
     font-size:16px;
-    outline:none;
     border:2px solid transparent;
     transition:0.3s;
 }
@@ -100,84 +164,130 @@ body{
     box-shadow:0 0 15px rgba(56,189,248,0.5);
 }
 
-.radio-group{
-    margin-top:15px;
-}
+/* ===================================================== */
+/* RADIO */
+/* ===================================================== */
 
 .radio-group label{
-    display:block;
-    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    margin-bottom:12px;
     cursor:pointer;
+    color:#E2E8F0;
 }
+
+.radio-group input{
+    margin-right:10px;
+    transform:scale(1.2);
+}
+
+/* ===================================================== */
+/* BOTÓN */
+/* ===================================================== */
 
 button{
     width:100%;
-    margin-top:25px;
-    padding:15px;
+    padding:16px;
     border:none;
-    border-radius:12px;
-    background:linear-gradient(90deg,#22c55e,#16a34a);
-    color:white;
+    border-radius:14px;
     font-size:18px;
     font-weight:bold;
+    background:
+    linear-gradient(90deg,#06B6D4,#2563EB);
+
+    color:white;
     cursor:pointer;
     transition:0.3s;
-    box-shadow:0 5px 20px rgba(34,197,94,0.4);
+    box-shadow:0 10px 30px rgba(37,99,235,0.4);
 }
 
 button:hover{
     transform:translateY(-3px);
-    box-shadow:0 10px 30px rgba(34,197,94,0.7);
+    box-shadow:0 15px 40px rgba(37,99,235,0.7);
 }
 
-.right-panel{
-    flex:1;
+/* ===================================================== */
+/* RESULTADOS */
+/* ===================================================== */
+
+.results{
+    margin-top:25px;
+    background:#020617;
+    border-radius:15px;
     padding:20px;
-    min-width:700px;
+    border:1px solid rgba(56,189,248,0.2);
+}
+
+.results-title{
+    color:#38BDF8;
+    font-weight:bold;
+    margin-bottom:12px;
+    font-size:18px;
+}
+
+#resultado{
+    line-height:2;
+    color:#F8FAFC;
+}
+
+/* ===================================================== */
+/* PANEL DERECHO */
+/* ===================================================== */
+
+.right-panel{
+    padding:20px;
+}
+
+.canvas-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
 }
 
 .canvas-title{
-    text-align:center;
-    font-size:24px;
+    font-size:22px;
     font-weight:600;
-    margin-bottom:15px;
-    color:#93C5FD;
+    color:#7DD3FC;
+}
+
+.status{
+    padding:8px 14px;
+    border-radius:10px;
+    background:#16A34A;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(22,163,74,0.5);
 }
 
 canvas{
     width:100%;
-    background:linear-gradient(to bottom,#f8fafc,#dbeafe);
+    background:
+    linear-gradient(to bottom,#EFF6FF,#BFDBFE);
     border-radius:20px;
-    border:3px solid rgba(255,255,255,0.2);
-    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+    border:3px solid rgba(255,255,255,0.1);
+    box-shadow:0 15px 50px rgba(0,0,0,0.5);
 }
 
-.info-box{
-    margin-top:20px;
-    padding:15px;
-    border-radius:15px;
-    background:rgba(0,0,0,0.25);
-    color:#F8FAFC;
-    line-height:1.8;
-    min-height:120px;
-}
+/* ===================================================== */
+/* RESPONSIVE */
+/* ===================================================== */
 
-.result-title{
-    color:#38BDF8;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-@media(max-width:1100px){
+@media(max-width:1200px){
 
     .main{
-        flex-direction:column;
+        grid-template-columns:1fr;
     }
 
-    .left-panel,
-    .right-panel{
-        width:100%;
-        min-width:100%;
+    .header{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .university{
+        text-align:center;
     }
 }
 
@@ -188,70 +298,100 @@ canvas{
 
 <div class="container">
 
-    <div class="titulo">
-        SISTEMA DE POLEAS - SEGUNDA LEY DE NEWTON
+    <!-- HEADER -->
+    <div class="header">
+
+        <div class="title">
+            SIMULADOR DE POLEAS
+        </div>
+
+        <div class="university">
+            Física I • Segunda Ley de Newton<br>
+            Alexander Rojo, 0910-25-1382
+        </div>
+
     </div>
 
+    <!-- MAIN -->
     <div class="main">
 
         <!-- PANEL IZQUIERDO -->
         <div class="left-panel card">
 
-            <div class="enunciado">
-                Dos bloques cuelgan de una polea ideal.<br><br>
+            <div class="section">
 
-                El sistema calcula automáticamente:
-                <br><br>
+                <div class="section-title">
+                    Descripción del Sistema
+                </div>
 
-                • Aceleración del sistema<br>
-                • Tensión en la cuerda<br>
-                • Movimiento de los bloques
+                <div class="description">
+                    Este simulador analiza el comportamiento
+                    dinámico de un sistema de poleas ideal
+                    utilizando la Segunda Ley de Newton.
+                    <br><br>
+
+                    El sistema calcula:
+                    <br><br>
+
+                    • Aceleración<br>
+                    • Tensión<br>
+                    • Movimiento de masas
+                </div>
+
             </div>
 
-            <div class="section-title">
-                Ingreso de Datos
+            <div class="section">
+
+                <div class="section-title">
+                    Parámetros de Entrada
+                </div>
+
+                <div class="input-group">
+                    <label>Masa del Bloque 1 (kg)</label>
+                    <input type="number" id="m1" value="0">
+                </div>
+
+                <div class="input-group">
+                    <label>Masa del Bloque 2 (kg)</label>
+                    <input type="number" id="m2" value="0">
+                </div>
+
             </div>
 
-            <div class="input-group">
-                <label>Masa Bloque 1 (kg)</label>
-                <input type="number" id="m1" value="0">
-            </div>
+            <div class="section">
 
-            <div class="input-group">
-                <label>Masa Bloque 2 (kg)</label>
-                <input type="number" id="m2" value="0">
-            </div>
+                <div class="section-title">
+                    Dirección del Movimiento
+                </div>
 
-            <div class="section-title">
-                Dirección del Movimiento
-            </div>
+                <div class="radio-group">
 
-            <div class="radio-group">
+                    <label>
+                        <input type="radio" name="movimiento" value="1" checked>
+                        Bloque 1 desciende
+                    </label>
 
-                <label>
-                    <input type="radio" name="movimiento" value="1" checked>
-                    Bloque 1 desciende
-                </label>
+                    <label>
+                        <input type="radio" name="movimiento" value="2">
+                        Bloque 2 desciende
+                    </label>
 
-                <label>
-                    <input type="radio" name="movimiento" value="2">
-                    Bloque 2 desciende
-                </label>
+                </div>
 
             </div>
 
             <button onclick="calcular()">
-                CALCULAR Y ANIMAR
+                INICIAR SIMULACIÓN
             </button>
 
-            <div class="info-box">
+            <div class="results">
 
-                <div class="result-title">
-                    RESULTADOS
+                <div class="results-title">
+                    RESULTADOS DEL SISTEMA
                 </div>
 
                 <div id="resultado">
-                    Esperando datos...
+                    Esperando simulación...
                 </div>
 
             </div>
@@ -261,11 +401,19 @@ canvas{
         <!-- PANEL DERECHO -->
         <div class="right-panel card">
 
-            <div class="canvas-title">
-                ANIMACIÓN DEL SISTEMA
+            <div class="canvas-header">
+
+                <div class="canvas-title">
+                    Visualización Física del Sistema
+                </div>
+
+                <div class="status">
+                    SISTEMA ACTIVO
+                </div>
+
             </div>
 
-            <canvas id="canvas" width="900" height="550"></canvas>
+            <canvas id="canvas" width="1000" height="620"></canvas>
 
         </div>
 
@@ -278,14 +426,12 @@ canvas{
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-function dibujarSistema(y1, y2){
+function fondoTecnico(){
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    // Fondo técnico
     ctx.strokeStyle = "rgba(0,0,0,0.05)";
+    ctx.lineWidth = 1;
 
-    for(let i=0;i<canvas.width;i+=40){
+    for(let i=0;i<canvas.width;i+=50){
 
         ctx.beginPath();
         ctx.moveTo(i,0);
@@ -293,119 +439,179 @@ function dibujarSistema(y1, y2){
         ctx.stroke();
     }
 
-    for(let i=0;i<canvas.height;i+=40){
+    for(let i=0;i<canvas.height;i+=50){
 
         ctx.beginPath();
         ctx.moveTo(0,i);
         ctx.lineTo(canvas.width,i);
         ctx.stroke();
     }
+}
 
-    // Base superior
-    ctx.fillStyle = "#374151";
-    ctx.fillRect(320,40,260,25);
+function dibujarSistema(y1,y2){
 
-    // Polea
-    let cx = 450;
-    let cy = 160;
-    let r = 70;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    let grad = ctx.createRadialGradient(cx,cy,20,cx,cy,70);
+    fondoTecnico();
 
-    grad.addColorStop(0,"#E5E7EB");
-    grad.addColorStop(1,"#6B7280");
+    // =====================================================
+    // BASE
+    // =====================================================
+
+    ctx.fillStyle = "#334155";
+
+    ctx.fillRect(350,50,300,25);
+
+    // =====================================================
+    // POLEA
+    // =====================================================
+
+    let cx = 500;
+    let cy = 180;
+    let r = 85;
+
+    let grad = ctx.createRadialGradient(
+        cx,cy,20,
+        cx,cy,r
+    );
+
+    grad.addColorStop(0,"#F8FAFC");
+    grad.addColorStop(1,"#64748B");
 
     ctx.beginPath();
     ctx.arc(cx,cy,r,0,Math.PI*2);
+
     ctx.fillStyle = grad;
     ctx.fill();
 
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = "#111827";
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = "#0F172A";
     ctx.stroke();
 
-    // Centro
+    // Centro polea
+
     ctx.beginPath();
-    ctx.arc(cx,cy,15,0,Math.PI*2);
-    ctx.fillStyle = "#111";
+    ctx.arc(cx,cy,18,0,Math.PI*2);
+
+    ctx.fillStyle = "#020617";
     ctx.fill();
 
-    // Cuerda
-    ctx.strokeStyle = "#B45309";
-    ctx.lineWidth = 6;
+    // =====================================================
+    // CUERDA
+    // =====================================================
 
+    ctx.strokeStyle = "#92400E";
+    ctx.lineWidth = 7;
+
+    // izquierda
     ctx.beginPath();
-    ctx.moveTo(380,y1);
-    ctx.lineTo(380,160);
+    ctx.moveTo(415,y1);
+    ctx.lineTo(415,180);
     ctx.stroke();
 
+    // arco
     ctx.beginPath();
     ctx.arc(cx,cy,r,Math.PI,0,false);
     ctx.stroke();
 
+    // derecha
     ctx.beginPath();
-    ctx.moveTo(520,160);
-    ctx.lineTo(520,y2);
+    ctx.moveTo(585,180);
+    ctx.lineTo(585,y2);
     ctx.stroke();
 
-    // Bloque 1
-    let grad1 = ctx.createLinearGradient(0,y1,0,y1+100);
+    // =====================================================
+    // BLOQUE 1
+    // =====================================================
 
-    grad1.addColorStop(0,"#ef4444");
-    grad1.addColorStop(1,"#991b1b");
+    let g1 = ctx.createLinearGradient(
+        0,y1,
+        0,y1+120
+    );
 
-    ctx.fillStyle = grad1;
+    g1.addColorStop(0,"#EF4444");
+    g1.addColorStop(1,"#7F1D1D");
 
-    ctx.fillRect(325,y1,110,100);
+    ctx.fillStyle = g1;
 
-    ctx.strokeStyle = "#111";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(325,y1,110,100);
+    ctx.fillRect(350,y1,130,120);
 
-    // Bloque 2
-    let grad2 = ctx.createLinearGradient(0,y2,0,y2+100);
+    ctx.strokeStyle = "#111827";
+    ctx.lineWidth = 4;
 
-    grad2.addColorStop(0,"#3b82f6");
-    grad2.addColorStop(1,"#1e3a8a");
+    ctx.strokeRect(350,y1,130,120);
 
-    ctx.fillStyle = grad2;
+    // =====================================================
+    // BLOQUE 2
+    // =====================================================
 
-    ctx.fillRect(465,y2,110,100);
+    let g2 = ctx.createLinearGradient(
+        0,y2,
+        0,y2+120
+    );
 
-    ctx.strokeStyle = "#111";
-    ctx.strokeRect(465,y2,110,100);
+    g2.addColorStop(0,"#3B82F6");
+    g2.addColorStop(1,"#1E3A8A");
 
-    // Texto masas
+    ctx.fillStyle = g2;
+
+    ctx.fillRect(520,y2,130,120);
+
+    ctx.strokeStyle = "#111827";
+    ctx.strokeRect(520,y2,130,120);
+
+    // =====================================================
+    // TEXTO MASAS
+    // =====================================================
+
     ctx.fillStyle = "white";
-    ctx.font = "bold 24px Poppins";
+    ctx.font = "bold 24px Orbitron";
     ctx.textAlign = "center";
 
     ctx.fillText(
         document.getElementById("m1").value + " kg",
-        380,
-        y1 + 58
+        415,
+        y1 + 70
     );
 
     ctx.fillText(
         document.getElementById("m2").value + " kg",
-        520,
-        y2 + 58
+        585,
+        y2 + 70
     );
+
+    // =====================================================
+    // FLECHAS DE DIRECCIÓN
+    // =====================================================
+
+    ctx.fillStyle = "#22C55E";
+    ctx.font = "bold 40px Arial";
+
+    if(y1 > y2){
+
+        ctx.fillText("↓",300,y1+70);
+        ctx.fillText("↑",700,y2+70);
+
+    }else{
+
+        ctx.fillText("↑",300,y1+70);
+        ctx.fillText("↓",700,y2+70);
+    }
 }
 
 function animar(direccion){
 
-    let y1 = 300;
-    let y2 = 300;
+    let y1 = 340;
+    let y2 = 340;
 
-    const sup = 220;
-    const inf = 380;
+    const sup = 230;
+    const inf = 430;
 
     let frame = 0;
 
     function mover(){
 
-        if(frame < 100){
+        if(frame < 120){
 
             if(direccion === "bloque1"){
 
@@ -431,8 +637,13 @@ function animar(direccion){
 
 function calcular(){
 
-    let m1 = parseFloat(document.getElementById("m1").value);
-    let m2 = parseFloat(document.getElementById("m2").value);
+    let m1 = parseFloat(
+        document.getElementById("m1").value
+    );
+
+    let m2 = parseFloat(
+        document.getElementById("m2").value
+    );
 
     if(isNaN(m1) || isNaN(m2)){
 
@@ -448,7 +659,8 @@ function calcular(){
 
     const g = 9.8;
 
-    const opcion = document.querySelector(
+    const opcion =
+    document.querySelector(
         'input[name="movimiento"]:checked'
     ).value;
 
@@ -457,11 +669,16 @@ function calcular(){
 
     if(opcion == "1"){
 
-        a = ((m1 - m2) * g) / (m1 + m2);
+        a =
+        ((m1-m2)*g)/(m1+m2);
 
-        T = (2 * m1 * m2 * g) / (m1 + m2);
+        T =
+        (2*m1*m2*g)/(m1+m2);
 
-        document.getElementById("resultado").innerHTML =
+        document.getElementById(
+            "resultado"
+        ).innerHTML =
+
         `
         <b>Bloque 1 desciende</b><br><br>
 
@@ -469,18 +686,28 @@ function calcular(){
         <b>${a.toFixed(2)} m/s²</b><br><br>
 
         Tensión:
-        <b>${T.toFixed(2)} N</b>
+        <b>${T.toFixed(2)} N</b><br><br>
+
+        Estado:
+        <span style="color:#22C55E;">
+        Simulación completada
+        </span>
         `;
 
         animar("bloque1");
 
     }else{
 
-        a = ((m2 - m1) * g) / (m1 + m2);
+        a =
+        ((m2-m1)*g)/(m1+m2);
 
-        T = (2 * m1 * m2 * g) / (m1 + m2);
+        T =
+        (2*m1*m2*g)/(m1+m2);
 
-        document.getElementById("resultado").innerHTML =
+        document.getElementById(
+            "resultado"
+        ).innerHTML =
+
         `
         <b>Bloque 2 desciende</b><br><br>
 
@@ -488,14 +715,19 @@ function calcular(){
         <b>${a.toFixed(2)} m/s²</b><br><br>
 
         Tensión:
-        <b>${T.toFixed(2)} N</b>
+        <b>${T.toFixed(2)} N</b><br><br>
+
+        Estado:
+        <span style="color:#22C55E;">
+        Simulación completada
+        </span>
         `;
 
         animar("bloque2");
     }
 }
 
-dibujarSistema(300,300);
+dibujarSistema(340,340);
 
 </script>
 
